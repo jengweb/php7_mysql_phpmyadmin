@@ -1,4 +1,4 @@
-# php7_mysql_phpmyadmin
+# php7_mysql_phpmyadmin For Docker Mac(OSX) 
 
 Set up Host
 ```
