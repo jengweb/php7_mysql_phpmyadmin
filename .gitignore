@@ -1,0 +1,8 @@
+dockers/web/db/data/data/*
+dockers/web/db-test/data/data/*
+dockers/web/lb/logs/*
+dockers/web/web1/logs/*
+dockers/web/web2/logs/*
+dockers/web/lb/nginx/conf/bitnami/*
+dockers/web/web1/nginx/conf/bitnami/*
+dockers/web/web2/nginx/conf/bitnami/*
