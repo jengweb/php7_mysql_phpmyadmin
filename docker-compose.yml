@@ -1,7 +1,8 @@
-version: '2'
+version: "3.5"
 
 services:
     lb:
+        container_name: lb
         image: jengweb/nginx:1.12
         ports:
             - 80:8080
@@ -12,6 +13,7 @@ services:
             - ./dockers/web/lb/logs:/opt/bitnami/nginx/logs
             - ./dockers/web/lb/nginx:/bitnami/nginx
     web1:
+        container_name: web1
         image: jengweb/nginx:1.12
         depends_on:
             - web1-phpfpm
@@ -20,11 +22,13 @@ services:
             - ./dockers/web/web1/nginx:/bitnami/nginx
             - ./web:/app
     web1-phpfpm:
+        container_name: web1-phpfpm
         image: jengweb/php-fpm:7.1
         volumes:
             - ./dockers/web/web1/phpfpm:/bitnami/php-fpm
             - ./web:/app
     web2:
+        container_name: web2
         image: jengweb/nginx:1.12
         depends_on:
             - web2-phpfpm
@@ -33,25 +37,29 @@ services:
             - ./dockers/web/web2/nginx:/bitnami/nginx
             - ./web:/app
     web2-phpfpm:
+        container_name: web2-phpfpm
         image: jengweb/php-fpm:7.1
         volumes:
             - ./dockers/web/web2/phpfpm:/bitnami/php-fpm
             - ./web:/app
     mysql:
+        container_name: mysql
         image: jengweb/mysql:5.7
         volumes:
             - ./dockers/web/db/data:/bitnami/mysql
         environment:
-            - ALLOW_EMPTY_PASSWORD=yes
-            - MYSQL_USER=jengweb
-            - MYSQL_PASSWORD=isyl]y[jengweb
-            - MYSQL_DATABASE=my_database
+            # - ALLOW_EMPTY_PASSWORD=yes
+            # - MYSQL_USER=jengweb
+            # - MYSQL_PASSWORD=jengweb
+            # - MYSQL_DATABASE=my_database
+            - MYSQL_ROOT_PASSWORD=jengweb
         restart: always
     phpmyadmin:
+        container_name: phpmyadmin
         image: phpmyadmin/phpmyadmin
         depends_on:
             - mysql
         environment:
-            - PMA_USER=jengweb
-            - PMA_PASSWORD=isyl]y[jengweb
+            # - PMA_ARBITRARY=1
             - PMA_HOST=mysql
+        restart: always
